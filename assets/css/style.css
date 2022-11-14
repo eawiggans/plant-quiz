@@ -1,0 +1,19 @@
+/* * {
+    background-color: rgb(97, 197, 97);
+} */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    text-align: center;
+    margin: auto;
+    
+}
+/* 
+main {
+    margin: auto;
+} */
