@@ -32,60 +32,55 @@
 // button.textContent = "THIS IS BUTTON";
 
 
+// TIMER CODE
 
+var timeLeft = 0;
 
-var questions = [ 
-   {
-        question: "This is the first question",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        rightAnswer: "answer1"
-    },
-    {
-        question: "This is the second question",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
+// QUESTION OBJECT
+
+var q = {
+        question: ["This is the first question", "This is the second question", "This is the third question", "This is the fourth question", "This is the fifth question"],
+        a: ["answer1", "answer2"],
         right: "answer1"
-    },
-    {
-        question: "This is the third question",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        right: "answer1"
-    },
-    {
-        question: "This is the fourth question",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        right: "answer1"
-    },
-    {
-        question: "This is the fifth question",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        right: "answer1"
-    }
-]
+}
 
-var questionSlide = document.querySelector("#quiz-content");
-var questionQuestion = questions.question;
+var questionLine = document.querySelector("#quiz-content");
+var answerLine1 = document.querySelector("#first-a");
+var answerLine2 = document.querySelector("#second-a");
+var answerLine3 = document.querySelector("#third-a");
+var answerLine4 = document.querySelector("#fourth-a");
+var questionQuestion = q.question;
+var questionAns = q.a;
+console.log(q);
 
 
-
-
-
+// QUESTION FUNCTION
 
 function callSlide() {
-    var questionQuestion = questions[0].question;
+    var questionQuestion = q[0].question[0];
+    var questionAns = q[0].a[0];
     console.log(questionQuestion);
 
-    questionSlide.textContent = questionQuestion;
 
+    questionLine.textContent = questionQuestion;
+    answerLine1.textContent = questionAns;
 }
 
 callSlide();
-console.log(questionSlide);
+
+// END GAME/ENTER INITIALS CODE (LOCAL STORAGE)
 
 
+// SCOREBOARD CODE (LOCAL STORAGE)
 
 
+// START BUTTON CODE
 
 
-// var makeP = document.createElement("p");
-// makeP.textContent = "some content";
-// document.body.appendChild(makeP);
+// START BUTTON EVENT LISTENER AND CALL TIMER AND QUESTION FUNCTIONS
+
+
+// QUESTION ANSWER EVENT LISTENER AND TIMER SUBTRACTION
+
+
+// END GAME FUNCTION/CALL INPUT/CALL SCOREBOARD
