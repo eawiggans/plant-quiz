@@ -4,15 +4,28 @@
 // Hides question space
 document.getElementById("quiz-space").style.display = "none";
 
-// GAME OVER INPUT SLIDE
+// GAME OVER INPUT SLIDE THIS NEEDS WORK!!!!!
+// TODO: input
+//        local storage of score and initials
+          
 function callGameOver() {
   document.getElementById("quiz-space").style.display = "none";
   var gameOver = document.getElementById("game-over");
-  gameOver.createElement("input");
-  gameOver.setAttribute("type", "text")
+  gameOver.textContent("GAME OVER");
+//   // TODO: how to make prompt go away once initials are submitted
+//   var initInput = prompt("Enter your initials to see your place on the scoreboard!");
+//   // TODO: how to make stored to local storage
+//   localStorage.setItem("initInput", JSON.stringify(initInput));
+
+  
+  // document.createElement("INPUT");
+  // initForm.setAttribute("type", "text")
 }
 
+
 // TIMER CODE
+// TODO: Make timer ending end game!
+
 var timeLeft = 70;
 
 function setTime() {
@@ -25,7 +38,7 @@ function setTime() {
       if(timeLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-        callGameOver();
+        // TODO: how do i call game over function without messing up timer??
       }
   
     }, 1000);
@@ -34,6 +47,8 @@ function setTime() {
 
 
 // QUESTION OBJECT
+
+// TODO: debug slide transitions!!!!
 
 var q = {
         qu: ["What is the plant kingdom called?", "What kind of environment do ferns prefer?", "How does xylem carry water and nutrients in vascular plants?", "Which of the following is not an important factor in soil health?", "Which species is native to North America?"],
@@ -55,6 +70,7 @@ var dBtn = document.createElement("button");
 
 // QUESTION FUNCTIONS
 
+// question 1
 
 function callSlide() {
     questionQuestion = q.qu[0];
@@ -79,19 +95,26 @@ function callSlide() {
    
     var clickNext = document.getElementById("quiz-space");
     var wrong = clickNext.addEventListener("click", function() { 
+      if (timeLeft > 0) {
       console.log("incorrect")
       timeLeft -= 10;
-      callSlideTwo();
+      clickNext.removeEventListener("click", wrong);
+      callSlideTwo();}
+      else {
+        callGameOver()
+      }
     });
 
     var clickRight = document.getElementById("second-a");
     var right = clickRight.addEventListener("click", function(event) {
       event.stopPropagation();
+      clickNext.removeEventListener("click", right);
       console.log("RIGHT ANSWER");
       callSlideTwo();
     });
 }
 
+// questiton 2
 function callSlideTwo() {
   questionQuestion = q.qu[1];
   questionLine.textContent = questionQuestion;
@@ -107,9 +130,13 @@ function callSlideTwo() {
  
   var clickNext = document.getElementById("quiz-space");
   var wrong = clickNext.addEventListener("click", function() { 
+    if (timeLeft > 0) {
     console.log("incorrect")
     timeLeft -= 10;
-    callSlideThree();
+    callSlideThree();}
+    else {
+      callGameOver()
+    }
   });
 
   var clickRight = document.getElementById("first-a");
@@ -120,6 +147,8 @@ function callSlideTwo() {
   });
 
 }
+
+// question 3
 
 function callSlideThree() {
   questionQuestion = q.qu[2];
@@ -135,14 +164,18 @@ function callSlideThree() {
   dBtn.textContent = q.a[11];
  
   var clickNext = document.getElementById("quiz-space");
-  var wrong = clickNext.addEventListener("click", function() { 
+  clickNext.addEventListener("click", function() { 
+    if (timeLeft > 0) {
     console.log("incorrect")
     timeLeft -= 10;
-    callSlideFour();
+    callSlideFour();}
+    else {
+      callGameOver()
+    }
   });
 
   var clickRight = document.getElementById("third-a");
-  var right = clickRight.addEventListener("click", function(event) {
+  clickRight.addEventListener("click", function(event) {
     event.stopPropagation();
     console.log("RIGHT ANSWER")
     callSlideFour();
@@ -150,6 +183,7 @@ function callSlideThree() {
 
 }
 
+// question 4
 function callSlideFour() {
   questionQuestion = q.qu[3];
   questionLine.textContent = questionQuestion;
@@ -165,9 +199,13 @@ function callSlideFour() {
  
   var clickNext = document.getElementById("quiz-space");
   var wrong = clickNext.addEventListener("click", function() { 
+    if (timeLeft > 0) {
     console.log("incorrect")
     timeLeft -= 10;
-    callSlideFive();
+    callSlideFive();}
+    else {
+      callGameOver()
+    }
   });
 
   var clickRight = document.getElementById("first-a");
@@ -179,6 +217,7 @@ function callSlideFour() {
 
 }
 
+// question 5
 function callSlideFive() {
   questionQuestion = q.qu[4];
   questionLine.textContent = questionQuestion;
@@ -195,7 +234,6 @@ function callSlideFive() {
   var clickNext = document.getElementById("quiz-space");
   var wrong = clickNext.addEventListener("click", function() { 
     console.log("incorrect")
-    timeLeft -= 10;
     callGameOver();
   });
 
@@ -225,22 +263,3 @@ startBtn.addEventListener("click", function() {
 })
 
 
-
-
-
-// END GAME/ENTER INITIALS CODE (LOCAL STORAGE)
-
-
-// SCOREBOARD CODE (LOCAL STORAGE)
-
-
-// START BUTTON CODE
-
-
-// START BUTTON EVENT LISTENER AND CALL TIMER AND QUESTION FUNCTIONS
-
-
-// QUESTION ANSWER EVENT LISTENER AND TIMER SUBTRACTION
-
-
-// END GAME FUNCTION/CALL INPUT/CALL SCOREBOARD
