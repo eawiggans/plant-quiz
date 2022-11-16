@@ -1,55 +1,46 @@
+// QUIZ JAVASCRIPT
 
-// var slideH2 = document.createElement("h2");
-// var slideList = document.createElement("ol");
-// var slideLi1 = document.createElement("li");
-// var slideLi2 = document.createElement("li");
-// var slideLi3 = document.createElement("li");
-// var slideLi4 = document.createElement("li");
+// INITIAL STATE
 
-// var button = document.createElement("BUTTON");
-// // Defines Content of Tags to be Appended
-// slideH2.innerHTML = "first question here";
-// slideLi1.innerHTML = "first button here " + button;
-// slideLi2.textContent = "second button here";
-// slideLi3.textContent = "third button here";
-// slideLi4.textContent = "fourth button here";
-
-
-
-// // Puts Slide Up on Page
-// document.body.appendChild(slideH2);
-// document.body.appendChild(slideList);
-// slideList.appendChild(slideLi1);
-// slideList.appendChild(slideLi2);
-// slideList.appendChild(slideLi3);
-// slideList.appendChild(slideLi4);
-
-
-// var quizContent = document.querySelector("#quiz-content");
-
-// li.append(button);
-// button.setAttribute("style", "margin:auto; width: 150px; height: 30px;");
-// button.textContent = "THIS IS BUTTON";
-
-
+// Hides timer element on page load
+// document.getElementById("timer-space").style.display = "none";
+// Hides question space
+document.getElementById("quiz-space").style.display = "none";
 // TIMER CODE
+var timeLeft = 70;
 
-var timeLeft = 0;
+function setTime() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      timeLeft--;
+    var timerSpace = document.getElementById("timer-space")
+      timerSpace.textContent = timeLeft + " seconds remaining";
+  
+      if(timeLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        // sendMessage();
+      }
+  
+    }, 1000);
+  }
+
 
 // QUESTION OBJECT
 
 var q = {
-        question: ["This is the first question", "This is the second question", "This is the third question", "This is the fourth question", "This is the fifth question"],
-        a: ["answer1", "answer2"],
+        qu: ["What is the plant kingdom called?", "What kind of environment do ferns prefer?", "This is the third question", "This is the fourth question", "This is the fifth question"],
+        a: ["Fungi", "Plantae", "Verdiae", "Viviae", "humid", "dry", "full-sun", "large pot"],
         right: "answer1"
 }
 
 var questionLine = document.querySelector("#quiz-content");
-var answerLine1 = document.querySelector("#first-a");
-var answerLine2 = document.querySelector("#second-a");
-var answerLine3 = document.querySelector("#third-a");
-var answerLine4 = document.querySelector("#fourth-a");
-var questionQuestion = q.question;
+var lineOne = document.getElementById("first-a");
+var lineTwo = document.getElementById("second-a");
+var lineThree = document.getElementById("third-a");
+var lineFour = document.getElementById("fourth-a");
+var questionQuestion = q.qu;
 var questionAns = q.a;
 console.log(q);
 
@@ -57,16 +48,59 @@ console.log(q);
 // QUESTION FUNCTION
 
 function callSlide() {
-    var questionQuestion = q[0].question[0];
-    var questionAns = q[0].a[0];
-    console.log(questionQuestion);
-
+    var questionQuestion = q.qu[0];
+    // var questionAns = q.a[0];
 
     questionLine.textContent = questionQuestion;
-    answerLine1.textContent = questionAns;
+
+    var aBtn = document.createElement("button");
+    aBtn.textContent = q.a[0];
+    lineOne.appendChild(aBtn);
+    var bBtn = document.createElement("button");
+    bBtn.textContent = q.a[1];
+    lineTwo.appendChild(bBtn);
+    var cBtn = document.createElement("button");
+    cBtn.textContent = q.a[2];
+    lineThree.appendChild(cBtn);
+    var dBtn = document.createElement("button");
+    dBtn.textContent = q.a[3];
+    lineFour.appendChild(dBtn);
+    
+    // CAN I DO THIS IF/ELSE STYLE???
+    // how do i use stopPropagate here
+  
+    var clickNext = document.getElementById("quiz-space");
+    var clickRight = document.getElementById("second-a");
+    clickNext.addEventListener("click", function() {
+      console.log("YAY")
+      timeLeft -= 10;
+
+    })
+    
+    clickRight.onclick.stopPropagation();
+    clickRight.addEventListener("click", function() {
+      console.log("RIGHT ANSWER")
+})
 }
 
-callSlide();
+
+
+
+// START GAME
+// event listener on button
+// call setTime() and callSlide()
+// hide start-game section
+var startBtn = document.getElementById("start-game");
+startBtn.addEventListener("click", function() {
+    document.getElementById("quiz-space").style.display ="";
+    setTime()
+    callSlide()
+    document.getElementById("start-game").style.display ="none";
+})
+
+
+
+
 
 // END GAME/ENTER INITIALS CODE (LOCAL STORAGE)
 
