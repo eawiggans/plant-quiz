@@ -3,6 +3,9 @@
 // INITIAL STATE
 // Hides question space
 document.getElementById("quiz-space").style.display = "none";
+var timeLeft = 70;
+var timerInterval = 0;
+
 
 // GAME OVER INPUT SLIDE THIS NEEDS WORK!!!!!
 // TODO: input
@@ -10,35 +13,44 @@ document.getElementById("quiz-space").style.display = "none";
           
 function callGameOver() {
   document.getElementById("quiz-space").style.display = "none";
-  var gameOver = document.getElementById("game-over");
-  gameOver.textContent("GAME OVER");
-//   // TODO: how to make prompt go away once initials are submitted
-//   var initInput = prompt("Enter your initials to see your place on the scoreboard!");
-//   // TODO: how to make stored to local storage
-//   localStorage.setItem("initInput", JSON.stringify(initInput));
 
+  // document.getElementById("timer-space").style.display = "none";
+  var gameOver = document.getElementById("game-over");
   
-  // document.createElement("INPUT");
-  // initForm.setAttribute("type", "text")
-}
+  var form = document.createElement("form");
+  form.setAttribute("action", "submit");
+  gameOver.appendChild(form);
+  var initInput = document.createElement("input");
+    initInput.setAttribute("type", "text");
+    initInput.setAttribute("placeholder", "Enter your initials here");
+  form.appendChild(initInput);
+   var subBtn = document.createElement("input");
+   subBtn.setAttribute("type", "submit");
+   subBtn.setAttribute("value", "Submit");
+   form.appendChild(subBtn);
+  // localStorage.setItem("initInput", JSON.stringify(initInput));
+  }
+
+
+//   // TODO: how to make stored to local storage
+//   ;
+
 
 
 // TIMER CODE
-// TODO: Make timer ending end game!
+// TODO: end timer if callGameOver()
 
-var timeLeft = 70;
+
 
 function setTime() {
-    // Sets interval in variable
     var timerInterval = setInterval(function() {
       timeLeft--;
     var timerSpace = document.getElementById("timer-space")
       timerSpace.textContent = timeLeft + " seconds remaining";
   
       if(timeLeft === 0) {
-        // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // TODO: how do i call game over function without messing up timer??
+        callGameOver()
       }
   
     }, 1000);
@@ -51,7 +63,7 @@ function setTime() {
 // TODO: debug slide transitions!!!!
 
 var q = {
-        qu: ["What is the plant kingdom called?", "What kind of environment do ferns prefer?", "How does xylem carry water and nutrients in vascular plants?", "Which of the following is not an important factor in soil health?", "Which species is native to North America?"],
+        qu: ["1. What is the plant kingdom called?", "2. What kind of environment do ferns prefer?", "3. How does xylem carry water and nutrients in vascular plants?", "4. Which of the following is not an important factor in soil health?", "5. Which species is native to North America?"],
         a: ["Fungi", "Plantae", "Verdiae", "Viviae", "humid", "dry", "full-sun", "large pot", "From leaves to roots", "from the surface of leaves into the interior of the plant", "from roots to leaves","only to horizontally-reaching stems and branches", "crystalization", "aeration", "organic matter", "death and decay", "knotweed", "multiflora rose", "garlic mustard", "creeping charlie"]
 }
 
@@ -233,7 +245,7 @@ function callSlideFive() {
  
   var clickNext = document.getElementById("quiz-space");
   var wrong = clickNext.addEventListener("click", function() { 
-    console.log("incorrect")
+    console.log("incorrect");
     callGameOver();
   });
 
@@ -245,6 +257,7 @@ function callSlideFive() {
   });
 
 }
+
 
 // How do i make the transition to the next question?
 // make question 2 its own function and call it in both clickWrong and clickRight
