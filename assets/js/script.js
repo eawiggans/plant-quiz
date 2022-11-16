@@ -1,11 +1,17 @@
 // QUIZ JAVASCRIPT
 
 // INITIAL STATE
-
-// Hides timer element on page load
-// document.getElementById("timer-space").style.display = "none";
 // Hides question space
 document.getElementById("quiz-space").style.display = "none";
+
+// GAME OVER INPUT SLIDE
+function callGameOver() {
+  document.getElementById("quiz-space").style.display = "none";
+  var gameOver = document.getElementById("game-over");
+  gameOver.createElement("input");
+  gameOver.setAttribute("type", "text")
+}
+
 // TIMER CODE
 var timeLeft = 70;
 
@@ -19,20 +25,19 @@ function setTime() {
       if(timeLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // Calls function to create and append image
-        // sendMessage();
+        callGameOver();
       }
   
     }, 1000);
   }
 
 
+
 // QUESTION OBJECT
 
 var q = {
-        qu: ["What is the plant kingdom called?", "What kind of environment do ferns prefer?", "This is the third question", "This is the fourth question", "This is the fifth question"],
-        a: ["Fungi", "Plantae", "Verdiae", "Viviae", "humid", "dry", "full-sun", "large pot"],
-        right: "answer1"
+        qu: ["What is the plant kingdom called?", "What kind of environment do ferns prefer?", "How does xylem carry water and nutrients in vascular plants?", "Which of the following is not an important factor in soil health?", "Which species is native to North America?"],
+        a: ["Fungi", "Plantae", "Verdiae", "Viviae", "humid", "dry", "full-sun", "large pot", "From leaves to roots", "from the surface of leaves into the interior of the plant", "from roots to leaves","only to horizontally-reaching stems and branches", "crystalization", "aeration", "organic matter", "death and decay", "knotweed", "multiflora rose", "garlic mustard", "creeping charlie"]
 }
 
 var questionLine = document.querySelector("#quiz-content");
@@ -43,47 +48,168 @@ var lineFour = document.getElementById("fourth-a");
 var questionQuestion = q.qu;
 var questionAns = q.a;
 console.log(q);
+var aBtn = document.createElement("button");
+var bBtn = document.createElement("button");
+var cBtn = document.createElement("button");
+var dBtn = document.createElement("button");
 
+// QUESTION FUNCTIONS
 
-// QUESTION FUNCTION
 
 function callSlide() {
-    var questionQuestion = q.qu[0];
-    // var questionAns = q.a[0];
-
+    questionQuestion = q.qu[0];
     questionLine.textContent = questionQuestion;
 
-    var aBtn = document.createElement("button");
+    // var aBtn = document.createElement("button");
+    var aBtn = document.getElementById("first-a");
     aBtn.textContent = q.a[0];
-    lineOne.appendChild(aBtn);
-    var bBtn = document.createElement("button");
+    // lineOne.appendChild(aBtn);
+    // var bBtn = document.createElement("button");
+    var bBtn = document.getElementById("second-a");
     bBtn.textContent = q.a[1];
-    lineTwo.appendChild(bBtn);
-    var cBtn = document.createElement("button");
+    // lineTwo.appendChild(bBtn);
+    // var cBtn = document.createElement("button");
+    var cBtn = document.getElementById("third-a");
     cBtn.textContent = q.a[2];
-    lineThree.appendChild(cBtn);
-    var dBtn = document.createElement("button");
+    // lineThree.appendChild(cBtn);
+    // var dBtn = document.createElement("button");
+    var dBtn = document.getElementById("fourth-a");
     dBtn.textContent = q.a[3];
-    lineFour.appendChild(dBtn);
-    
-    // CAN I DO THIS IF/ELSE STYLE???
-    // how do i use stopPropagate here
-  
+    // lineFour.appendChild(dBtn);
+   
     var clickNext = document.getElementById("quiz-space");
-    var clickRight = document.getElementById("second-a");
-    clickNext.addEventListener("click", function() {
-      console.log("YAY")
+    var wrong = clickNext.addEventListener("click", function() { 
+      console.log("incorrect")
       timeLeft -= 10;
+      callSlideTwo();
+    });
 
-    })
-    
-    clickRight.onclick.stopPropagation();
-    clickRight.addEventListener("click", function() {
-      console.log("RIGHT ANSWER")
-})
+    var clickRight = document.getElementById("second-a");
+    var right = clickRight.addEventListener("click", function(event) {
+      event.stopPropagation();
+      console.log("RIGHT ANSWER");
+      callSlideTwo();
+    });
 }
 
+function callSlideTwo() {
+  questionQuestion = q.qu[1];
+  questionLine.textContent = questionQuestion;
 
+  var aBtn = document.getElementById("first-a");
+  aBtn.textContent = q.a[4];
+  var bBtn = document.getElementById("second-a");
+  bBtn.textContent = q.a[5];
+  var cBtn = document.getElementById("third-a");
+  cBtn.textContent = q.a[6];
+  var dBtn = document.getElementById("fourth-a");
+  dBtn.textContent = q.a[7];
+ 
+  var clickNext = document.getElementById("quiz-space");
+  var wrong = clickNext.addEventListener("click", function() { 
+    console.log("incorrect")
+    timeLeft -= 10;
+    callSlideThree();
+  });
+
+  var clickRight = document.getElementById("first-a");
+  var right = clickRight.addEventListener("click", function(event) {
+    event.stopPropagation();
+    console.log("RIGHT ANSWER")
+    callSlideThree();
+  });
+
+}
+
+function callSlideThree() {
+  questionQuestion = q.qu[2];
+  questionLine.textContent = questionQuestion;
+
+  var aBtn = document.getElementById("first-a");
+  aBtn.textContent = q.a[8];
+  var bBtn = document.getElementById("second-a");
+  bBtn.textContent = q.a[9];
+  var cBtn = document.getElementById("third-a");
+  cBtn.textContent = q.a[10];
+  var dBtn = document.getElementById("fourth-a");
+  dBtn.textContent = q.a[11];
+ 
+  var clickNext = document.getElementById("quiz-space");
+  var wrong = clickNext.addEventListener("click", function() { 
+    console.log("incorrect")
+    timeLeft -= 10;
+    callSlideFour();
+  });
+
+  var clickRight = document.getElementById("third-a");
+  var right = clickRight.addEventListener("click", function(event) {
+    event.stopPropagation();
+    console.log("RIGHT ANSWER")
+    callSlideFour();
+  });
+
+}
+
+function callSlideFour() {
+  questionQuestion = q.qu[3];
+  questionLine.textContent = questionQuestion;
+
+  var aBtn = document.getElementById("first-a");
+  aBtn.textContent = q.a[12];
+  var bBtn = document.getElementById("second-a");
+  bBtn.textContent = q.a[13];
+  var cBtn = document.getElementById("third-a");
+  cBtn.textContent = q.a[14];
+  var dBtn = document.getElementById("fourth-a");
+  dBtn.textContent = q.a[15];
+ 
+  var clickNext = document.getElementById("quiz-space");
+  var wrong = clickNext.addEventListener("click", function() { 
+    console.log("incorrect")
+    timeLeft -= 10;
+    callSlideFive();
+  });
+
+  var clickRight = document.getElementById("first-a");
+  var right = clickRight.addEventListener("click", function(event) {
+    event.stopPropagation();
+    console.log("RIGHT ANSWER")
+    callSlideFive();
+  });
+
+}
+
+function callSlideFive() {
+  questionQuestion = q.qu[4];
+  questionLine.textContent = questionQuestion;
+
+  var aBtn = document.getElementById("first-a");
+  aBtn.textContent = q.a[16];
+  var bBtn = document.getElementById("second-a");
+  bBtn.textContent = q.a[17];
+  var cBtn = document.getElementById("third-a");
+  cBtn.textContent = q.a[18];
+  var dBtn = document.getElementById("fourth-a");
+  dBtn.textContent = q.a[19];
+ 
+  var clickNext = document.getElementById("quiz-space");
+  var wrong = clickNext.addEventListener("click", function() { 
+    console.log("incorrect")
+    timeLeft -= 10;
+    callGameOver();
+  });
+
+  var clickRight = document.getElementById("fourth-a");
+  var right = clickRight.addEventListener("click", function(event) {
+    event.stopPropagation();
+    console.log("RIGHT ANSWER")
+    callGameOver();
+  });
+
+}
+
+// How do i make the transition to the next question?
+// make question 2 its own function and call it in both clickWrong and clickRight
 
 
 // START GAME
